@@ -159,6 +159,10 @@ model.fit(#images_train_reshaped,
     
 # export trained model
 model_export_dir = os.path.join('..','artifacts')
+
+if not os.path.exists(model_export_dir):
+    os.makedirs(model_export_dir)
+    
 model.save(os.path.join(model_export_dir,'cnn_model'))
 
 # export optimization results
