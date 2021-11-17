@@ -17,8 +17,8 @@ This last message is then picked up by the reception process of the client app.
 ## Setup
 
 1. Clone this repository.
-2. First you should rebuilt the conda environment by running `conda env create --file=conda_env.yaml`
-3. Second, you should download the mnist fashion data set by cloning this repository: `git clone https://github.com/zalandoresearch/fashion-mnist.git`. This should sit alongside this repository.
+2. Rebuilt the conda environment by running `conda env create --file=conda_env.yaml`
+3. Download the mnist fashion data set by cloning this repository: `git clone https://github.com/zalandoresearch/fashion-mnist.git`. Make sure this sits alongside this repository to maintain relative file path references across the project.
 
 For all subsequent steps, you will need the conda environment activated.
 
