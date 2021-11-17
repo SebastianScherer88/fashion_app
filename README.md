@@ -46,4 +46,4 @@ A remote/cloud based version of this scaling, for example using GCP's `Cloud Run
 ## Sources
 
 I had to learn a new GCP service - pubsub - and used `Priyanka Vergadia`'s great [series of videos](https://www.youtube.com/watch?v=cvu53CnZmGI).
-The code supporting publisher and subscription clients was taken and modified as needed from [this repo](https://github.com/googleapis/python-pubsub.git)
+The code supporting publisher and subscription clients was taken and modified as needed from [this repo](https://github.com/googleapis/python-pubsub/tree/main/samples/snippets/quickstart)
