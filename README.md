@@ -40,8 +40,8 @@ To host the ML service applying the trained ML model , run the script `./ml_serv
 
 Note that you can locally scale/parallelize this ML service by running the same above script from as many designated consoles in parallel as desired. 
 Since the messaging system feeding these duplicate model processes is supported by pubsub and only the one subscription (`read-analysis-requests`), these processes will not interfere and simply process and hand back "their share" of incoming image classification requests in an asynchronous fashion.
-You should notice the procesing speed of the individual ML processes drop with each new ML process that you launch, as the same input volume of requests is being shared amongst more and more ML servers.
-A remote/cloud based version of this scaling, for example using GCP's `Cloud Run` and a dockerised Ml process script is of course also possible.
+You should notice the output volume of the individual ML processes drop with each new ML process that you launch, as the same volume of incoming requests is being shared amongst more and more ML servers.
+A remote/cloud based version of this scaling, for example using GCP's `Cloud Run` and a dockerised ML process script is of course also possible and preferable for a commercial use case.
 
 ## Sources
 
