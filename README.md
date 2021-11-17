@@ -30,6 +30,8 @@ It will export the model artifact as well as some results metrics to a newly cre
 
 ## Simulating the client application & ML image classification service (Question 2 & 3)
 
+**You will need the `vector-fashion-ml-key.json` GCP credentials key in your repo top directory for any of this to work.**
+
 To host the client process making the image classification requests, run the script `./fashion_client/make_analysis_requests.py` from a designated console.
 
 To host the client process receiving the completed image classification requests, run the script `./fasion_client/get_analysis_outputs.py` from a designated console.
