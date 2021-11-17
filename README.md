@@ -25,7 +25,8 @@ For all subsequent steps, you will need the conda environment activated.
 ## Building the image classifier (Question 1)
 
 To build a keras model image classifier that achieves ~91% accuracy on the mnist-fashion test split, run the python script `./ml_model_development/code/build_model.py`.
-It will export the model artifact as well as some results metrics to a newly created `./ml_model_development/artifacts` subdirectory.
+
+It will export the model artifact as well as some results metrics to a newly created `./ml_model_development/artifacts` subdirectory. Together with `./ml_model_development/code/build_model_utils.py`, it should also allow you to retrain this basic model architecture on your own labelled images data set.
 
 ## Simulating the client application & ML image classification service (Question 2 & 3)
 
