@@ -30,6 +30,7 @@ It will export the model artifact as well as some results metrics to a newly cre
 ## Simulating the client application & ML image classification service (Question 2 & 3)
 
 To host the client process making the image classification requests, run the script `./fashion_client/make_analysis_requests.py` from a designated console.
+
 To host the client process receiving the completed image classification requests, run the script `./fasion_client/get_analysis_outputs.py` from a designated console.
 
 To host the ML service applying the trained ML model , run the script `./ml_server/image_classification_service.py` from one or more designated console.
