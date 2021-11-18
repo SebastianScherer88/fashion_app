@@ -83,6 +83,8 @@ if __name__ == '__main__':
     
     parser.add_argument("pause_seconds", 
                         help="Pauses between subsequent image classification requests published",
+                        nargs='?',
+                        default = 0.1,
                         type =  float)
 
     args = parser.parse_args()
