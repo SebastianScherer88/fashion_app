@@ -39,9 +39,6 @@ def normalize_img(image, label, img_size, n_classes, convert_to_grayscale=False)
     image = tf.image.resize(image, img_size)
     image = tf.cast(image, tf.float32) / 255.
     
-    # One hot encode the label
-    #label = tf.one_hot(label, depth=n_classes)
-    
     return image, label
 
 def preprocess_data(images: np.array, #[n_observations, width, height, n_channels],

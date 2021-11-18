@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import argparse
-import random
 from google.cloud import pubsub_v1
 from google.cloud.pubsub_v1 import PublisherClient as Pub
 
@@ -37,23 +35,6 @@ def pub(project_id: str,
     message_id = api_future.result()
 
     print(f"Published to {topic_path}: {message_id}:{data_kwargs['unique_id']}")
-
-# =============================================================================
-# if __name__ == "__main__":
-#     parser = argparse.ArgumentParser(
-#         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
-#     )
-#     parser.add_argument("project_id", help="Google Cloud project ID")
-#     parser.add_argument("topic_id", help="Pub/Sub topic ID")
-# 
-#     args = parser.parse_args()
-#     
-#     #image_vector_string = ','.join([str(random.choice(range(255))) for i in range(28**2)]) # too many characters: 2812 > 1024 = max
-#     #image_vector_dict = dict([('pixel_'+str(i),str(random.choice(range(255)))) for i in range(28**2)]) # too many attributes: 784 > 100 = max
-#     #we'll need to use a dedicated data storage/transfer service instead, like GCS
-# 
-#     pub(args.project_id, args.topic_id,data='test')
-# =============================================================================
   
 def callback(message: pubsub_v1.subscriber.message.Message) -> None:
     print(f"Received {message.attributes['unique_id']}.")
@@ -83,21 +64,3 @@ def sub(project_id: str, subscription_id: str, timeout: float = None, callback =
         streaming_pull_future.result()  # Block until the shutdown is complete.
 
     subscriber_client.close()
-
-
-# =============================================================================
-# if __name__ == "__main__":
-#     parser = argparse.ArgumentParser(
-#         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
-#     )
-#     parser.add_argument("project_id", help="Google Cloud project ID")
-#     parser.add_argument("subscription_id", help="Pub/Sub subscription ID")
-#     parser.add_argument(
-#         "timeout", default=None, nargs="?", const=1, help="Pub/Sub subscription ID"
-#     )
-# 
-#     args = parser.parse_args()
-# 
-#     sub(args.project_id, args.subscription_id, args.timeout)
-# 
-# =============================================================================
