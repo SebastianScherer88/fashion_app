@@ -34,11 +34,11 @@ This last message is then picked up by the reception process of the client app.
 
 **You will need the `vector-fashion-ml-key.json` GCP credentials key in your repo top directory for any of this to work.**
 
-To host the client process making the image classification requests, run `python make_analysis_requests.py` from a designated console while in the `./fashion_client` directory.
+To host the client process making the image classification requests, run `python make_analysis_requests.py` from a designated console while in the `./gcp_pubsub/fashion_client` directory.
 
-To host the client process receiving the completed image classification requests, run `python get_analysis_outputs.py` from a designated console while in the `./fasion_client` directory.
+To host the client process receiving the completed image classification requests, run `python get_analysis_outputs.py` from a designated console while in the `./gcp_pubsub/fasion_client` directory.
 
-To host the ML service applying the trained ML model , run `python image_classification_service.py` from one or more designated console(s) while in the `./ml_server` directory.
+To host the ML service applying the trained ML model , run `python image_classification_service.py` from one or more designated console(s) while in the `./gcp_pubsub/ml_server` directory.
 
 Note that you can locally scale/parallelize this ML service by running the same above script from as many designated consoles in parallel as desired. 
 Since the messaging system feeding these duplicate model processes is supported by pubsub and only the one subscription (`read-analysis-requests`), these processes will not interfere and simply process and hand back "their share" of incoming image classification requests in an asynchronous fashion.
