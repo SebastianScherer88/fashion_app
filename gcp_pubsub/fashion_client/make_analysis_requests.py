@@ -20,6 +20,7 @@ import time
 
 from gcs_utils import write_table_to_gcs
 from pubsub_utils import pub
+from google.cloud.pubsub_v1 import PublisherClient as Pub
 
 # constants
 # local
@@ -51,6 +52,10 @@ def make_fashion_requests(pause_seconds: int = 0.1):
     images_test_df = pd.DataFrame(images_test,
                                   columns = ['pixel_' + str(i) for i in range(28**2)])
     
+    
+    # Create a fully qualified identifier of form `projects/{project_id}/topics/{topic_id}`
+    client = Pub()
+    
     # ping randomly sample requests until process is killed
     while True:
         random_sample = random.choice(range(images_test_df.shape[0]))
@@ -68,6 +73,7 @@ def make_fashion_requests(pause_seconds: int = 0.1):
         # communicate to pubsub hub that image is awaiting analysis from ML model
         pub(project_id = PROJECT, 
             topic_id = REQUEST_PUBLISH_TOPIC,
+            client = client,
             data = 'Image request ' + unique_id,
             test_index = str(random_sample),
             unique_id = unique_id,
