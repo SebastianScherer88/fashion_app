@@ -91,4 +91,4 @@ Youtube, the [kafka-python documentation](https://kafka-python.readthedocs.io/en
 
 ![image](https://user-images.githubusercontent.com/26059962/143345163-d89f992d-44b8-415e-83de-651d48eb7d64.png) 
 
-:)
+:smile:
