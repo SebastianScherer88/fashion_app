@@ -24,7 +24,7 @@ image_classifier = load_model(MODEL_PATH)
 META_DATA_PATH = os.path.join('..','..','ml_model_development','meta','target_label_mapping.csv')
 labels = pd.read_csv(META_DATA_PATH)['label']
 
-LOCAL_MODE = True
+LOCAL_MODE = False
 
 if LOCAL_MODE:
     BOOTSTRAP_SERVER = 'localhost'
