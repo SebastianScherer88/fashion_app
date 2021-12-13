@@ -60,5 +60,6 @@ def serve_analysis_requests():
             publish_message(producer, KAFKA_RESPONSE_TOPIC, key=msg.key, value=dataframe_to_json(prediction_df))
             
 if __name__ == '__main__':
+    
     serve_analysis_requests()
     
