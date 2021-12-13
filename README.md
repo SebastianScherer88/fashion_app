@@ -14,7 +14,18 @@ To build a keras model image classifier that achieves ~91% accuracy on the mnist
 
 It will export the model artifact as well as some results metrics to a newly created `./ml_model_development/artifacts` subdirectory. Together with `./ml_model_development/code/build_model_utils.py`, it should also allow you to retrain this basic model architecture on your own labelled images data set.
 
-# Asyncronous Micro-services application - **GCP** system (Question 2 & 3)
+# Message broker API (Question 2)
+
+An object class supporting 
+
+- publishing of messages with and without payload
+- reading of messages without payload
+
+to either `kafka` (local or on GCP cluster) or `pubsub` message brokers is defined in the script `./client/message_broker_api.py`.
+
+It could be extended to support reading pubsub messages with payload based on a (yet to be defined) message format that holds GCS storage details, but since the ML server response is compact enough to be sent as a pubsub message directly and this API mainly acts as an adapter between client services and the message broker/ML service, this did not seem required for the exercise.
+
+# Asyncronous Micro-services application - **GCP** system (Question 3)
 
 GCP based asynchronous ML image classifier service. 
 
@@ -34,11 +45,11 @@ This last message is then picked up by the reception process of the client app.
 
 **You will need the `vector-fashion-ml-key.json` GCP credentials key in your repo top directory for any of this to work.**
 
-To host the client process making the image classification requests, run `python make_analysis_requests.py` from a designated console while in the `./gcp_pubsub/fashion_client` directory.
+To host the client process making the image classification requests, run `python make_fashion_client_requests.py -m pubsub -p 2` from a designated console while in the `./client` directory.
 
-To host the client process receiving the completed image classification requests, run `python get_analysis_outputs.py` from a designated console while in the `./gcp_pubsub/fasion_client` directory.
+To host the client process receiving the completed image classification requests, run `python read_ml_server_responses.py -m pubsub` from a designated console while in the `./client` directory.
 
-To host the ML service applying the trained ML model , run `python image_classification_service.py` from one or more designated console(s) while in the `./gcp_pubsub/ml_server` directory.
+To host the ML service applying the trained ML model , run `python pubsub_ml_service.py` from one or more designated console(s) while in the `./gcp_pubsub` directory.
 
 Note that you can locally scale/parallelize this ML service by running the same above script from as many designated consoles in parallel as desired. 
 Since the messaging system feeding these duplicate model processes is supported by pubsub and only the one subscription (`read-analysis-requests`), these processes will not interfere and simply process and hand back "their share" of incoming image classification requests in an asynchronous fashion.
@@ -50,7 +61,7 @@ A remote/cloud based version of this scaling, for example using GCP's `Cloud Run
 I had to learn a new GCP service - pubsub - and used `Priyanka Vergadia`'s great [series of videos](https://www.youtube.com/watch?v=cvu53CnZmGI).
 The code supporting publisher and subscription clients was taken and modified as needed from [this repo](https://github.com/googleapis/python-pubsub/tree/main/samples/snippets/quickstart)
 
-# Asyncronous Micro-services application - **Kafka** system (Question 2 & 3)
+# Asyncronous Micro-services application - **Kafka** system (Question 3)
 
 The same micro services application is implemented with a Kafka message broker hub instead of GCP pubsub. The upside of this is that we don't have to use an additional payload storage layer like GCS but instead can encode images into the messages directly. The downside is that we have to look after the infra and processes supporting the distributed message broker ourselves.
 
@@ -62,11 +73,11 @@ It is recommended to set `LOCAL_MODE = False` in the `kafka_utils.py`. This mean
 
 To create the necessary topics on your Kafka brokers (remote or local), run `create_kafka_topics.py` from the `./kafka_system` directory.
 
-To host the client process making the image classification requests, run `python make_analysis_requests.py` from a designated console while in the `./kafka_system/fashion_client` directory.
+To host the client process making the image classification requests, run `python make_fashion_client_requests.py -m kafka -p 2` from a designated console while in the `./client` directory.
 
-To host the client process receiving the completed image classification requests, run `python get_analysis_outputs.py` from a designated console while in the `./kafka_system/fasion_client` directory.
+To host the client process receiving the completed image classification requests, run `python read_ml_server_responses.py -m kafka` from a designated console while in the `./client` directory.
 
-To host the ML service applying the trained ML model , run `python image_classification_service.py` from one or more designated console(s) while in the `./kafka_system/ml_server` directory.
+To host the ML service applying the trained ML model , run `python kafka_ml_service.py` from one or more designated console(s) while in the `./kafka_system` directory.
 
 Note that you can locally scale/parallelize this ML service by running the same above script from as many designated consoles in parallel as desired. Since the group id is specified, subsequent consumer processes will be assigned remaining partitions in the topic to read from in parallel. Note that by default, only 3 partitions are created, so either increase that number at the topic creation stage or limit the ML process to 3 to avoid idle consumers.
 
