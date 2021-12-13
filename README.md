@@ -87,5 +87,8 @@ A remote/cloud based version of this scaling, for example using GCP's `Cloud Run
 
 ## Sources
 
-Youtube, the [kafka-python documentation](https://kafka-python.readthedocs.io/en/master/) and stackeroverflow. Also [this instructive repo](https://github.com/kadnan/Calories-Alert-Kafka.git). GCP Kafka cluster deployed using this GCP marketplace template: (![image](https://user-images.githubusercontent.com/26059962/143345163-d89f992d-44b8-415e-83de-651d48eb7d64.png)
-) :)
+Youtube, the [kafka-python documentation](https://kafka-python.readthedocs.io/en/master/) and stackeroverflow. Also [this instructive repo](https://github.com/kadnan/Calories-Alert-Kafka.git). GCP Kafka cluster deployed using this GCP marketplace template: 
+
+![image](https://user-images.githubusercontent.com/26059962/143345163-d89f992d-44b8-415e-83de-651d48eb7d64.png) 
+
+:)
