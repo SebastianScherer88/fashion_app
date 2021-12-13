@@ -7,8 +7,7 @@ Created on Wed Nov 17 17:56:26 2021
 
 import os
 import sys
-sys.path.append(os.path.join('..','..','ml_model_development','code'))
-sys.path.append('..')
+sys.path.append(os.path.join('..','ml_model_development','code'))
 
 import pandas as pd
 import numpy as np
@@ -18,10 +17,10 @@ from kafka_utils import *
 from kafka import KafkaConsumer, KafkaProducer
 
 # local
-MODEL_PATH = os.path.join('..','..','ml_model_development','artifacts','cnn_model')
+MODEL_PATH = os.path.join('..','ml_model_development','artifacts','cnn_model')
 image_classifier = load_model(MODEL_PATH)
 
-META_DATA_PATH = os.path.join('..','..','ml_model_development','meta','target_label_mapping.csv')
+META_DATA_PATH = os.path.join('..','ml_model_development','meta','target_label_mapping.csv')
 labels = pd.read_csv(META_DATA_PATH)['label']
 
 LOCAL_MODE = False

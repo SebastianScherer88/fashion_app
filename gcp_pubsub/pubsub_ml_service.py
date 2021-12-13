@@ -7,8 +7,8 @@ Created on Wed Nov 17 17:56:26 2021
 
 import os
 import sys
-sys.path.append(os.path.join('..','..','ml_model_development','code'))
-sys.path.append(os.path.join('..','gcp_utils'))
+sys.path.append(os.path.join('..','ml_model_development','code'))
+sys.path.append(os.path.join('gcp_utils'))
 
 import pandas as pd
 import numpy as np
@@ -19,10 +19,10 @@ from pubsub_utils import sub, pub
 from google.cloud.pubsub_v1.subscriber import message
 
 # local
-MODEL_PATH = os.path.join('..','..','ml_model_development','artifacts','cnn_model')
+MODEL_PATH = os.path.join('..','ml_model_development','artifacts','cnn_model')
 image_classifier = load_model(MODEL_PATH)
 
-META_DATA_PATH = os.path.join('..','..','ml_model_development','meta','target_label_mapping.csv')
+META_DATA_PATH = os.path.join('..','ml_model_development','meta','target_label_mapping.csv')
 labels = pd.read_csv(META_DATA_PATH)['label']
 
 # GCP
@@ -35,7 +35,7 @@ BUCKET_DATA_PREFIX = 'fashion_request_data'
 ANALYSIS_OUTPUT_TOPIC = 'image-analysis-outputs'
 
 # environment variables
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join('..','vector-fashion-ml-key.json')
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'vector-fashion-ml-key.json'
 
 def serve_analysis_request(message: message.Message) -> None:
     
